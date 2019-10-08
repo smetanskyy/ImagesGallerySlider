@@ -74,12 +74,20 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Data.cs" />
+    <Compile Include="Entities\Category.cs" />
+    <Compile Include="Entities\EFContext.cs" />
+    <Compile Include="Entities\Photo.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Migrations\201910081933318_Add tbls Photos &amp; Categories.cs" />
+    <Compile Include="Migrations\201910081933318_Add tbls Photos &amp; Categories.designer.cs">
+      <DependentUpon>201910081933318_Add tbls Photos &amp; Categories.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -93,6 +101,9 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <EmbeddedResource Include="Migrations\201910081933318_Add tbls Photos &amp; Categories.resx">
+      <DependentUpon>201910081933318_Add tbls Photos &amp; Categories.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
