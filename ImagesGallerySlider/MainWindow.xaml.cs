@@ -20,9 +20,20 @@ namespace ImagesGallerySlider
     /// </summary>
     public partial class MainWindow : Window
     {
+        public PhotoCollection Photos;
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            ImagesDir.Text = Environment.CurrentDirectory + "\\images";
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.Photos.Path = ImagesDir.Text;
         }
     }
 }
