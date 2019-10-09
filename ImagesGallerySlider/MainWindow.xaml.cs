@@ -25,28 +25,69 @@ namespace ImagesGallerySlider
         public MainWindow()
         {
             InitializeComponent();
-            _db = new Entities.EFContext();
-            _db.Photos.Count();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            var categories = _db.Categories.AsQueryable();
-            foreach (var item in categories)
+            string path = null;
+            BitmapImage bitmap = null;
+            try
             {
-                comboBox.Items.Add(item.NameOfCategory);
+                path = Environment.CurrentDirectory + "\\connecting.png";
+                bitmap = new BitmapImage();
+                bitmap.BeginInit();
+                bitmap.UriSource = new Uri(path);
+                bitmap.EndInit();
+                conIcon.Source = bitmap;
             }
-            //ImagesDir.Text = Environment.CurrentDirectory + "\\images";
-        }
+            catch (Exception)
+            {
+                MessageBox.Show("Something wrong!");
+            }
+            
+            try
+            {                
+                ConnectionProvider connection = new ConnectionProvider();
+                connection.ConectedEvent += (Entities.EFContext db) =>
+                {
+                    _db = db;
+                    this.Dispatcher.Invoke(new Action(() =>
+                    {
+                        lblStatus.Content = "Status: Connected!";
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            //this.Photos.Path = ImagesDir.Text;
+                        var categories = db.Categories.AsQueryable();
+                        comboBox.Items.Add("All photos");
+                        foreach (var item in categories)
+                        {
+                            comboBox.Items.Add(item.NameOfCategory);
+                        }
+                        
+                        Photos.Db = _db;
+                        comboBox.SelectedIndex = 0;
+                        path = Environment.CurrentDirectory + "\\complete.png";
+                        bitmap = new BitmapImage();
+                        bitmap.BeginInit();
+                        bitmap.UriSource = new Uri(path);
+                        bitmap.EndInit();
+                        conIcon.Source = bitmap;
+                    }));
+                };
+                connection.ConnectRun();
+            }
+            catch (Exception)
+            {
+
+                MessageBox.Show("Something wrong!");
+            }
         }
 
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            if (comboBox.SelectedItem != null && comboBox.SelectedItem.ToString().Count() > 0)
+            {
+                Photos.Category = comboBox.SelectedItem.ToString();
+                Photos.Update();
+            }
         }
     }
 }

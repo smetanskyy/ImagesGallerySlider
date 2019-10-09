@@ -35,6 +35,7 @@ namespace ImagesGallerySlider
 
     public class PhotoCollection : ObservableCollection<Photo>
     {
+        public Entities.EFContext Db { get; set; }
         private DirectoryInfo _directory;
         public string Category { get; set; }
         public PhotoCollection()
@@ -47,15 +48,16 @@ namespace ImagesGallerySlider
         public PhotoCollection(DirectoryInfo directory)
         {
             _directory = directory;
-            Update();
+            //Update();
         }
+
         public string Path
         {
             get { return _directory.FullName; }
             set
             {
                 _directory = new DirectoryInfo(value);
-                Update();
+                //Update();
             }
         }
 
@@ -69,24 +71,22 @@ namespace ImagesGallerySlider
             get { return _directory; }
         }
 
-        private void Update()
+        public void Update()
         {
             this.Clear();
 
             try
             {
-                using (Entities.EFContext _db = new Entities.EFContext())
+                IQueryable<Entities.Photo> photos = Db.Photos.AsQueryable();
+                if (Category != "All photos")
                 {
-                    IQueryable<Entities.Photo> photos = _db.Photos.AsQueryable();
-                    if (Category != "All photos")
-                    {
-                        photos = _db.Photos.AsQueryable().Where(p => p.IdCategory == 1);
-                    }
+                    int idCategory = Db.Categories.SingleOrDefault(c => c.NameOfCategory == Category).IdCategory;
+                    photos = Db.Photos.AsQueryable().Where(p => p.IdCategory == idCategory);
+                }
 
-                    foreach (var item in photos)
-                    {
-                        Add(new Photo($"{Path}\\{item.FileName}") { Сaption = item.Сaption });
-                    }
+                foreach (var item in photos)
+                {
+                    Add(new Photo($"{Path}\\{item.FileName}") { Сaption = item.Сaption });
                 }
 
                 //foreach (FileInfo f in _directory.GetFiles("*.jpg"))
