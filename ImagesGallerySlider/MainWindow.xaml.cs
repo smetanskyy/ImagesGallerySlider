@@ -20,20 +20,33 @@ namespace ImagesGallerySlider
     /// </summary>
     public partial class MainWindow : Window
     {
+        private Entities.EFContext _db;
         public PhotoCollection Photos;
         public MainWindow()
         {
             InitializeComponent();
+            _db = new Entities.EFContext();
+            _db.Photos.Count();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            ImagesDir.Text = Environment.CurrentDirectory + "\\images";
+            var categories = _db.Categories.AsQueryable();
+            foreach (var item in categories)
+            {
+                comboBox.Items.Add(item.NameOfCategory);
+            }
+            //ImagesDir.Text = Environment.CurrentDirectory + "\\images";
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            this.Photos.Path = ImagesDir.Text;
+            //this.Photos.Path = ImagesDir.Text;
+        }
+
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }

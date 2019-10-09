@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ImagesGallerySlider.Entities
 {
-    class EFContext : DbContext
+    public class EFContext : DbContext
     {
         public EFContext() : base("connectTo_DB_Gallery") { }
         public DbSet<Photo> Photos { get; set; }

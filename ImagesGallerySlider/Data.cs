@@ -14,7 +14,7 @@ namespace ImagesGallerySlider
     {
         private string _path;
         private Uri _source;
-        private BitmapFrame _image;
+        public string Сaption { get; set; }
 
         public Photo(string path)
         {
@@ -28,13 +28,19 @@ namespace ImagesGallerySlider
         {
             return _source.ToString();
         }
+
+        private BitmapFrame _image;
         public BitmapFrame Image { get { return _image; } }
     }
 
     public class PhotoCollection : ObservableCollection<Photo>
     {
         private DirectoryInfo _directory;
-        public PhotoCollection() { }
+        public string Category { get; set; }
+        public PhotoCollection()
+        {
+            Category = "All photos";
+        }
 
         public PhotoCollection(string path) : this(new DirectoryInfo(path)) { }
 
@@ -66,12 +72,28 @@ namespace ImagesGallerySlider
         private void Update()
         {
             this.Clear();
+
             try
             {
-                foreach (FileInfo f in _directory.GetFiles("*.jpg"))
+                using (Entities.EFContext _db = new Entities.EFContext())
                 {
-                    Add(new Photo(f.FullName));
+                    IQueryable<Entities.Photo> photos = _db.Photos.AsQueryable();
+                    if (Category != "All photos")
+                    {
+                        photos = _db.Photos.AsQueryable().Where(p => p.IdCategory == 1);
+                    }
+
+                    foreach (var item in photos)
+                    {
+                        Add(new Photo($"{Path}\\{item.FileName}") { Сaption = item.Сaption });
+                    }
                 }
+
+                //foreach (FileInfo f in _directory.GetFiles("*.jpg"))
+                //{
+
+                //    Add(new Photo(f.FullName));
+                //}
             }
             catch (DirectoryNotFoundException)
             {

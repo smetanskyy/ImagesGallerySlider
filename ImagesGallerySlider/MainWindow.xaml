@@ -22,12 +22,8 @@
                 <!-- Image Template -->
                 <Border Padding="4" Background="White" BorderBrush="#22000000" BorderThickness="1">
                     <StackPanel Orientation="Vertical">
+                        <Label Content="{Binding Сaption}"></Label>
                         <Image Source="{Binding Image}"/>
-                        <Label Content="SEMEN">
-                            <!--<Label.ToolTip>
-                                Only JPeg images with a stored thumbnail will display a thumbnail during preview.
-                            </Label.ToolTip>-->
-                        </Label>
                     </StackPanel>
                 </Border>
             </Grid>
@@ -137,11 +133,11 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <!-- Photo Management Canvas -->
-        <DockPanel Grid.Column="0" Grid.Row="0" Margin="0,0,0,10">
+        <!--<DockPanel Grid.Column="0" Grid.Row="0" Margin="0,0,0,10">
             <Button DockPanel.Dock="Right" Width="80" Click="Button_Click">Change</Button>
             <Label DockPanel.Dock="Left" Margin="0,0,10,0">Path:</Label>
             <TextBox Name="ImagesDir" Margin="10,0" />
-        </DockPanel>
+        </DockPanel>-->
         <GroupBox Grid.Column="0" Grid.Row="1">
             <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
                 <ListBox
@@ -160,10 +156,8 @@
                       Width="15" 
                       Background="Transparent" 
                       ShowsPreview="True"/>
-
         <!-- Right Hand Panel -->
-        <DockPanel Grid.Row="0" Grid.Column="1" 
-                   Grid.RowSpan="2" Margin="15,0,0,0">
+        <DockPanel Grid.Row="0" Grid.Column="1" Margin="15,0,0,0">
             <Label DockPanel.Dock="Left">Zoom</Label>
             <Slider Name="ZoomSlider"
                     Margin="10,0,0,0"
@@ -176,5 +170,11 @@
                     SmallChange="5"
                     LargeChange="20" />
         </DockPanel>
+        <StackPanel Grid.Row="1" Grid.Column="1">
+            <Label Margin="10,10,10,0">Select category</Label>
+            <ComboBox x:Name="comboBox" Margin="10,0,10,10" SelectedIndex="0" SelectionChanged="ComboBox_SelectionChanged">
+                <TextBlock>All photos</TextBlock>
+            </ComboBox>
+        </StackPanel>
     </Grid>
 </Window>
