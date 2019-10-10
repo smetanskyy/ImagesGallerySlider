@@ -1,0 +1,30 @@
+﻿<Window x:Class="ImagesGallerySlider.AddNewPhoto"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ImagesGallerySlider"
+        mc:Ignorable="d"
+        Title="Adding Photo" Height="500" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="350*"/>
+            <RowDefinition Height="60"/>
+        </Grid.RowDefinitions>
+        <WrapPanel Grid.Row="0">
+            <Label Margin="10">Choose category</Label>
+            <ComboBox x:Name="comboBoxChoose" Margin="10" Width="200" SelectionChanged="ComboBoxChoose_SelectionChanged" ></ComboBox>
+        </WrapPanel>
+        <Canvas x:Name="CanvasPanel" Grid.Row="1" MouseLeftButtonDown="CanvasPanel_MouseLeftButtonDown">
+            <Border Height="{Binding ElementName=CanvasPanel, Path=ActualHeight}" Width="{Binding ElementName=CanvasPanel, Path=ActualWidth}" Background="LightBlue">
+                <Image x:Name = "SourceImage" Stretch="Fill"/>
+            </Border>
+        </Canvas>
+        <WrapPanel Grid.Row="2">
+            <Button x:Name="btnLoad" Margin="40,20,30,20" Width="100" Click="BtnLoad_Click">LOAD IMAGE</Button>
+            <Button x:Name="btnSave"  Margin="40,20,30,20" Width="100" Click="BtnSave_Click">SAVE IMAGE</Button>
+            <Button x:Name="btnCansel"  Margin="150,20,30,20" Width="100" Content="CANCEL" Click="BtnCansel_Click"/>
+        </WrapPanel>
+    </Grid>
+</Window>

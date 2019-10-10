@@ -135,9 +135,8 @@
         <!-- Photo Management Canvas -->
         <DockPanel Grid.Column="0" Grid.Row="0" Margin="0,0,0,10">
             <!--<Button DockPanel.Dock="Right" Width="80" Click="Button_Click">Change</Button>-->
-            <!--<MediaElement x:Name="conIcon" Width="30" Stretch="Fill"/>-->
-            <Image x:Name="conIcon" Width="30"></Image>
-            <Label x:Name="lblStatus" DockPanel.Dock="Left" Margin="0,0,10,0">Status: Connecting ...</Label>
+            <Image x:Name="conIcon" DockPanel.Dock="Left" Width="30"></Image>
+            <Label x:Name="lblStatus" Margin="10,0,10,0">Status: Connecting ...</Label>
             <!--<TextBox Name="ImagesDir" Margin="10,0" />-->
         </DockPanel>
         <GroupBox Grid.Column="0" Grid.Row="1">
@@ -176,6 +175,7 @@
             <Label Margin="10,10,10,0">Select category</Label>
             <ComboBox x:Name="comboBox" Margin="10,0,10,10" SelectionChanged="ComboBox_SelectionChanged">
             </ComboBox>
+            <Button x:Name="btnAddImage" Margin="30,50,30,10" Click="BtnAddImage_Click">ADD PHOTO</Button>
         </StackPanel>
     </Grid>
 </Window>

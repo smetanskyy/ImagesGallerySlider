@@ -76,7 +76,6 @@ namespace ImagesGallerySlider
             }
             catch (Exception)
             {
-
                 MessageBox.Show("Something wrong!");
             }
         }
@@ -88,6 +87,14 @@ namespace ImagesGallerySlider
                 Photos.Category = comboBox.SelectedItem.ToString();
                 Photos.Update();
             }
+        }
+
+        private void BtnAddImage_Click(object sender, RoutedEventArgs e)
+        {
+            if (_db == null)
+                return;
+            AddNewPhoto addNewPhoto = new AddNewPhoto(_db);
+            addNewPhoto.ShowDialog();
         }
     }
 }
