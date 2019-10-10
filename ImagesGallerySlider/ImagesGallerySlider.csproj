@@ -68,8 +68,15 @@
     <Compile Include="AddNewPhoto.xaml.cs">
       <DependentUpon>AddNewPhoto.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CroppingWindow.xaml.cs">
+      <DependentUpon>CroppingWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Provider.cs" />
     <Page Include="AddNewPhoto.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CroppingWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

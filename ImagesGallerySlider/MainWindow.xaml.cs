@@ -93,8 +93,11 @@ namespace ImagesGallerySlider
         {
             if (_db == null)
                 return;
+            this.Hide();
             AddNewPhoto addNewPhoto = new AddNewPhoto(_db);
             addNewPhoto.ShowDialog();
+            Photos.Update();
+            this.Show();
         }
     }
 }

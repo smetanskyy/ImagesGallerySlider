@@ -5,26 +5,22 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ImagesGallerySlider"
         mc:Ignorable="d"
-        Title="Adding Photo" Height="500" Width="800">
+        Title="Adding Photo" Height="140" Width="800" ResizeMode="NoResize" Top="0" Left="0" Loaded="Window_Loaded">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
-            <RowDefinition Height="350*"/>
-            <RowDefinition Height="60"/>
+            <RowDefinition Height="60*"/>
         </Grid.RowDefinitions>
-        <WrapPanel Grid.Row="0">
-            <Label Margin="10">Choose category</Label>
-            <ComboBox x:Name="comboBoxChoose" Margin="10" Width="200" SelectionChanged="ComboBoxChoose_SelectionChanged" ></ComboBox>
-        </WrapPanel>
-        <Canvas x:Name="CanvasPanel" Grid.Row="1" MouseLeftButtonDown="CanvasPanel_MouseLeftButtonDown">
-            <Border Height="{Binding ElementName=CanvasPanel, Path=ActualHeight}" Width="{Binding ElementName=CanvasPanel, Path=ActualWidth}" Background="LightBlue">
-                <Image x:Name = "SourceImage" Stretch="Fill"/>
-            </Border>
-        </Canvas>
-        <WrapPanel Grid.Row="2">
-            <Button x:Name="btnLoad" Margin="40,20,30,20" Width="100" Click="BtnLoad_Click">LOAD IMAGE</Button>
-            <Button x:Name="btnSave"  Margin="40,20,30,20" Width="100" Click="BtnSave_Click">SAVE IMAGE</Button>
-            <Button x:Name="btnCansel"  Margin="150,20,30,20" Width="100" Content="CANCEL" Click="BtnCansel_Click"/>
+        <DockPanel Grid.Row="0">
+            <Label Margin="10,10,10,10" Content="Choose category"/>
+            <ComboBox x:Name="comboBoxChoose" Width="200" SelectionChanged="ComboBoxChoose_SelectionChanged" Margin="10,10,10,10" />
+            <Label Margin="30,10,0,10" Content="Enter caption to photo"/>
+            <TextBox x:Name="textboxCaption" Background="White" VerticalContentAlignment="Center" Margin="10,10,10,10"/>
+        </DockPanel>
+        <WrapPanel Grid.Row="1">
+            <Button x:Name="btnLoad" Margin="40,10,30,5" Width="100" Click="BtnLoad_Click" Content="LOAD IMAGE"/>
+            <Button x:Name="btnSave"  Margin="40,10,30,5" Width="100" Click="BtnSave_Click" Content="SAVE IMAGE"/>
+            <Button x:Name="btnCansel"  Margin="200,10,30,5" Width="100" Content="CANCEL" Click="BtnCansel_Click"/>
         </WrapPanel>
     </Grid>
 </Window>
